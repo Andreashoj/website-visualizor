@@ -1,0 +1,46 @@
+.sidebar {
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.02);
+  left: 0;
+  top: 0;
+  width: 34.2rem;
+  padding: 2.4rem;
+
+  &__layout-title {
+    font-weight: 600;
+    font-size: 1.8rem;
+    opacity: 0.7;
+    margin-bottom: 1.2rem;
+  }
+
+  &__layout-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__layout {
+    width: 41%;
+    height: 10rem;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(88, 114, 253, 0.024) 0%,
+      rgba(88, 114, 253, 0.03) 100%
+    );
+    border-radius: 0.5rem;
+    padding: 1.2rem;
+  }
+
+  &__component-section {
+    margin-top: 3.2rem;
+  }
+}
+
+.draggable {
+  cursor: grab;
+}
+
+.themes {
+  margin-top: 20px;
+}

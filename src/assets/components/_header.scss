@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  background-color: $primary;
+  margin: 0;
+  padding: 0 2.4rem;
+
+  &__logo {
+    cursor: pointer;
+
+    h6 {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.6rem;
+    }
+  }
+
+  &__mode {
+    display: flex;
+    color: #fff;
+
+    p {
+      font-weight: 300;
+      opacity: 0.8;
+      padding: 0.4rem 1.2rem;
+      margin: 0 0.4rem;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .mode-active {
+      p {
+        font-weight: 500;
+        opacity: 1;
+        background: #7e92ff;
+        border-radius: 0.5rem;
+
+        &:hover {
+          background: #8f9fff;
+        }
+      }
+    }
+  }
+}

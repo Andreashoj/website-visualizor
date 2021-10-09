@@ -1,5 +1,12 @@
-// Globals
-@import "./globals/themes.scss"; 
-@import "./globals/reset.scss"; 
+// Variables
+@import "./variables/colors";
 
-@import "./vendors/bootstrap.scss" 
+// Globals
+@import "./globals/themes.scss";
+@import "./globals/reset.scss";
+
+@import "./vendors/bootstrap.scss";
+
+// Components
+@import "./components/sidebar";
+@import "./components/header";
