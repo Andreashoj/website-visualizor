@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { defineProps, reactive, watch } from "vue";
+import { ref, watch, onBeforeMount } from "vue";
 import DragComponent from "./DragComponent.vue";
 import useConfiguration from "../composables/useConfiguration"
 
-const { updateComponents } = useConfiguration();
+const { updateComponents, findLayoutCols } = useConfiguration();
 
 const props = defineProps({
 	id: { type: String, required: true },
 	rowId: { type: String, required: true },
 })
 
-const cols = reactive<IColumn>({
+let cols = ref<IColumn>({
 	col1: {
 		components: []
 	},
@@ -19,14 +19,24 @@ const cols = reactive<IColumn>({
 	}
 })
 
+const loading = true;
+
 watch(cols, () => {
-	updateComponents(cols, props.rowId, props.id)
+	updateComponents(cols.value, props.rowId, props.id)
 }, { deep: true })
+
+onBeforeMount(() => {
+	const layoutCols = findLayoutCols(props.rowId, props.id)
+
+	if (layoutCols && layoutCols.col1) {
+		cols.value = layoutCols
+	}
+})
 
 </script>
 	
 <template>
-	<div class="row layout-row">
+	<div class="row layout-row" v-if="cols">
 		<div class="col-lg-6">
 			<DragComponent v-model:components="cols.col1.components" />
 		</div>

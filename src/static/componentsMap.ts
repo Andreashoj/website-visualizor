@@ -1,10 +1,12 @@
-import { shallowRef } from 'vue';
+import { defineAsyncComponent } from "vue";
 import { v4 as uuid } from 'uuid';
+const LayoutCustom1 = defineAsyncComponent(() => import('../components/LayoutCustom1.vue'));
+const LayoutCustom2 = defineAsyncComponent(() => import('../components/LayoutCustom2.vue'));
 import ButtonComponent from '../components/Button.vue';
 import ImageComponent from '../components/ImageComponent.vue';
 import VideoComponent from '../components/VideoComponent.vue';
 
-const components = shallowRef([
+const componentsMap = [
   {
     value: ButtonComponent,
     title: 'ButtonComponent',
@@ -20,6 +22,16 @@ const components = shallowRef([
     title: 'VideoComponent',
     id: uuid(),
   },
-]);
+  {
+    value: LayoutCustom1,
+    title: 'Layout 50/50',
+    id: uuid(),
+  },
+  {
+    value: LayoutCustom2,
+    title: 'Layout 30/30/30',
+    id: uuid(),
+  },
+];
 
-export default components;
+export default componentsMap;

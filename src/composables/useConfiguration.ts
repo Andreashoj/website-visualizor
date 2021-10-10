@@ -1,5 +1,6 @@
 import { reactive, watch, onBeforeMount } from 'vue';
 import { v4 as uuid } from 'uuid';
+import components from '../static/componentsMap';
 
 // Outside of function scope to create global variable
 const config = reactive<IConfiguration>({ rows: [], id: uuid() });
@@ -55,10 +56,40 @@ export default function useConfiguration() {
     });
   };
 
+  // Find component and return it
+  // ** Components are stored as strings, to avoid path bugs when stringifying components ** //
+  const findComponent = (el: IComponent) => {
+    const component = components.find((comp) => comp.title === el.title);
+
+    if (component) {
+      return component.value;
+    }
+  };
+
+  // Find a rows components and update it on load
+  const findLayoutCols = (rowId: string, layoutId: string): IColumn | null => {
+    let cols: IColumn | null = null;
+
+    config.rows.forEach((row) => {
+      if (row.id === rowId) {
+        row.layout?.forEach((layout) => {
+          console.log(layout)
+          if (layout.id === layoutId) {
+            cols = Object.assign({}, layout.components);
+          }
+        });
+      }
+    });
+
+    return cols;
+  };
+
   return {
     config,
     addRow,
     addLayout,
     updateComponents,
+    findComponent,
+    findLayoutCols,
   };
 }

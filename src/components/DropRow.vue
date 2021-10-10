@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, shallowRef, defineProps, watch, onMounted } from "vue";
+import { ref, shallowRef, watch, onBeforeMount } from "vue";
 import draggable from 'vuedraggable'
 import useConfiguration from "../composables/useConfiguration"
 
-const { addLayout } = useConfiguration();
+const { addLayout, findComponent } = useConfiguration();
 
 const props = defineProps({
 	rowId: { type: String, required: true },
@@ -18,7 +18,7 @@ watch(layout, () => {
 	addLayout(layout.value, props.rowId)
 })
 
-onMounted(() => {
+onBeforeMount(() => {
 	props.rowLayouts?.forEach((row) => {
 		//@ts-ignore
 		layout.value.push(row)
@@ -38,7 +38,7 @@ onMounted(() => {
 			item-key="value"
 		>
 			<template #item="{ element, index }">
-				<Component :key="index" :is="element.value" :id="element.id" :row-id="props.rowId" />
+				<Component :key="index" :is="findComponent(element)" :id="element.id" :row-id="props.rowId" />
 			</template>
 		</draggable>
 	</div>
